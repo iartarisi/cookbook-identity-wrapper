@@ -51,11 +51,9 @@ node[:postgresql][:password][:postgres] = 'secret'
 node.set[:openstack][:developer_mode] = true
 
 node.set[:openstack][:db][:service_type] = sql[:database][:sql_engine]
-node.set[:openstack][:db][:port] = "5432"
 node.set[:openstack][:db][:identity][:host] = sql_address
 
 node.set[:openstack][:db][:identity][:db_type] = sql[:database][:sql_engine]
-node.set[:openstack][:db][:identity][:port] = "5432"
 Chef::Log.error(sql[:database][:sql_engine])
 node.set[:openstack][:db][:identity][:db_name] = node[:keystone][:db][:database]
 
