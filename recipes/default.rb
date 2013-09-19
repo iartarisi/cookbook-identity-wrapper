@@ -49,15 +49,15 @@ node[:postgresql][:password][:postgres] = 'secret'
 
 # TODO developer mode is set so we don't have to handle data bags yet
 node.set[:openstack][:developer_mode] = true
-node.set[:openstack][:db][:service_type] = "postgresql"
+
+node.set[:openstack][:db][:service_type] = sql[:database][:sql_engine]
 node.set[:openstack][:db][:port] = "5432"
 node.set[:openstack][:db][:identity][:host] = sql_address
 
-# this used to be hardcoded in database/attributes, now it's hardcoded here
-node.set[:openstack][:db][:identity][:db_type] = "postgresql"
+node.set[:openstack][:db][:identity][:db_type] = sql[:database][:sql_engine]
+node.set[:openstack][:db][:identity][:port] = "5432"
 Chef::Log.error(sql[:database][:sql_engine])
 node.set[:openstack][:db][:identity][:db_name] = node[:keystone][:db][:database]
-node.set[:openstack][:db][:identity][:port] = "5432"
 
 db_create_with_user("identity",
   node[:openstack][:db][:identity][:username],
